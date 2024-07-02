@@ -12,27 +12,58 @@ const startBtnNode = document.querySelector("#start-btn");
 const gameBoxNode = document.querySelector("#game-box");
 
 //* VARIABLES GLOBALES DEL JUEGO
+let personaObj = null; // esto significa que la persona no existe aun, existirá más adelante
+let vasosDeAguaArr = [];
+let alcoholArr = [];
 
 //* FUNCIONES GLOBALES DEL JUEGO
 function startGame() {
-  // TODO 1. Ocultar la pantalla de inicio
   splashScreenNode.style.display = "none";
 
-  // TODO 2. Mostrar la pantalla de juego
   gameScreenNode.style.display = "flex";
 
-  // TODO 3. Mostrar los elementos iniciales del juego
+  personaObj = new Persona();
 
-  // TODO 4. Iniciar el gameLoop
   setInterval(() => {
     gameLoop();
   }, Math.round(1000 / 60));
+
+  setInterval(() => {
+    vasoDeAguaAppear();
+  }, 4000);
+
+  setInterval(() => {
+    alcoholAppear();
+  }, Math.random() * 3000);
 }
 
 function gameLoop() {
   //.todo lo que hay en esta función se ejecuta 60 veces
   // cosas que automaticamente van sucediendo en el juego
+  vasosDeAguaArr.forEach((eachVasoDeAgua) => {
+    eachVasoDeAgua.automaticMovement();
+  });
+  alcoholArr.forEach((eachAlcohol) => {
+    eachAlcohol.automaticMovementAlcohol();
+  });
+}
 
+function vasoDeAguaAppear() {
+  let randomPositionX = Math.floor(Math.random() * gameBoxNode.offsetWidth);
+
+  let vasosDeAgua = new VasoAgua(randomPositionX);
+  vasosDeAguaArr.push(vasosDeAgua);
+}
+
+function alcoholAppear() {
+  let randomPositionX = Math.floor(Math.random() * gameBoxNode.offsetWidth);
+
+  let alcoholWhite = new Alcohol(randomPositionX, "white");
+  alcoholArr.push(alcoholWhite);
+
+  // añadir vino rojo
+  let alcoholRed = new Alcohol(randomPositionX , "red");
+  alcoholArr.push(alcoholRed);
 }
 
 //* EVENT LISTENER
@@ -40,22 +71,29 @@ startBtnNode.addEventListener("click", () => {
   startGame();
 });
 
+window.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight") {
+    personaObj.moveSides("right");
+  } else if (event.key === "ArrowLeft") {
+    personaObj.moveSides("left");
+  }
+});
 
 //* PLANIFICACION
 /* 
-- el fondo
+- el fondo ✅
 - la persona
-    - x, y, w, h
+    - x, y, w, h ✅
     - personWallColision()
-    - moveSides()
-- alcohol
-    - x, y, w, h
-    - alcoholAppear()
-    - automaticMovement()
+    - moveSides() ✅
 - vaso de agua
-    - x, y, w, h
-    - waterAppear()
-    - automaticMovement()
+    - x, y, w, h ✅
+    - vasoDeAguaAppear()✅
+    - automaticMovement()✅
+ - alcohol
+     - x, y, w, h
+     - alcoholAppear()
+     - automaticMovement()
 - colisionPersonaConAgua()
 - colisionPersonaConAlcohol()
 - score
