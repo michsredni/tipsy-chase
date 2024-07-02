@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tipsy Chase</title>
+    <link rel="stylesheet" href="./styles/style.css">
+  </head>
+  <body>
+    <!-- PANTALLA DE INICIO -->
+    <div id="splash-screen" class="container">
+      <img src="./images/tipsy-chase-logo.png" height="300" alt="logo" />
+      <button id="start-btn">START</button>
+      <div>
+        <H1>CÓMO JUGAR</H1>
+      </div>
+    </div>
 
-    <script src="../main.js"></script>
-</body>
+    <!-- PANTALLA DE JUEGO -->
+    <div id="game-screen" class="container">
+      <!-- Elementos del juego como puntuación, vidas, etc deberia ir aqui (dentro del game-screen pero fuera del game-box) -->
+      <div id="game-box">
+        <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
+      </div>
+    </div>
+
+    <!-- PANTALLA FINAL -->
+    <div id="game-over-screen" class="container">
+      <img src="./images/gameover.png" width="500" alt="logo" />
+    </div>
+
+    <script src="./js/main.js"></script>
+  </body>
 </html>
