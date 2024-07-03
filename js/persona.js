@@ -17,7 +17,7 @@ class Persona {
     this.node.style.width = `${this.w}px`;
     this.node.style.height = `${this.h}px`;
 
-    this.movementSpeed = 18
+    this.movementSpeed = 30
   }
 
   // aquí estaran los metodos de persona

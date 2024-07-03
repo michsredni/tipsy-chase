@@ -1,11 +1,14 @@
 class Alcohol {
-  constructor(randomPositionX, type) {
+  constructor(randomPositionX, alcoholImg) {
     this.node = document.createElement("img");
-    if (type === "red") {
-      this.node.src = "./images/wine-red.png";
-    } else if (type === "white") {
+    if (alcoholImg === "white") {
       this.node.src = "./images/wine-white.png";
+    } else if (alcoholImg === "red"){
+      this.node.src = "./images/wine-red.png";
+    } else if (alcoholImg === "cocktail"){
+      this.node.src = "./images/cocktail.png"
     }
+
     gameBoxNode.append(this.node);
 
     this.x = randomPositionX;

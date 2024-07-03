@@ -11,7 +11,8 @@ const reStartBtnNode = document.querySelector("#restart-btn");
 
 // score
 const scoreNode = document.querySelector("#score");
-const finalScoreNode = document.querySelector("#final-score")
+const finalScoreNode = document.querySelector("#final-score");
+
 
 // game box
 const gameBoxNode = document.querySelector("#game-box");
@@ -21,8 +22,6 @@ let mainIntervalId = null;
 let vasosAguaIntervalId = null;
 let alcoholIntervalId = null;
 
-
-
 //* VARIABLES GLOBALES DEL JUEGO
 let personaObj = null; // esto significa que la persona no existe aun, existirá más adelante
 let vasoDeAguaObj = null;
@@ -31,13 +30,18 @@ let alcoholObj = null;
 let vasosDeAguaArr = [];
 let alcoholArr = [];
 
+let audio = new Audio("./audio/select-sound-121244.mp3")
+let audioGameOver = new Audio ("./audio/8-bit-video-game-lose-sound-version-1-145828.mp3")
+
 //* FUNCIONES GLOBALES DEL JUEGO
 function startGame() {
   splashScreenNode.style.display = "none";
-  scoreNode.innerText = 0
+  scoreNode.innerText = 0;
 
   gameScreenNode.style.display = "flex";
   gameOverScreenNode.style.display = "none";
+  lifeHeartsNode.value = 100;
+
 
   personaObj = new Persona();
   vasosDeAguaArr = [];
@@ -56,7 +60,7 @@ function startGame() {
   // iniciar el intervalo que aparece alcohol en el juego
   alcoholIntervalId = setInterval(() => {
     alcoholAppear();
-  }, 1500);
+  }, 1300);
 }
 
 function gameLoop() {
@@ -74,7 +78,7 @@ function gameLoop() {
 
 function gameOver() {
   // 1. todos los intervalos deben detenerse <<<
-  clearInterval(mainIntervalId)
+  clearInterval(mainIntervalId);
   clearInterval(vasosAguaIntervalId);
   clearInterval(alcoholIntervalId);
   // 2. ocultar pantalla de juego
@@ -83,8 +87,11 @@ function gameOver() {
   gameOverScreenNode.style.display = "flex";
   // 4. que sea borrar todos los nodos de los elementos del juego (gamebox)
   gameBoxNode.innerHTML = "";
-// 5. aparece score final
-  finalScoreNode.innerText++
+  // 5. aparece score final
+  finalScoreNode.innerText = scoreNode.innerText;
+
+  audioGameOver.play();
+  audio.pause();
 }
 
 function vasoDeAguaAppear() {
@@ -96,12 +103,15 @@ function vasoDeAguaAppear() {
 
 function alcoholAppear() {
   let randomPositionX = Math.floor(Math.random() * gameBoxNode.offsetWidth);
-  let randomAlcohol = Math.round(Math.random());
+  // let randomAlcohol = Math.floor(Math.random() * alcoholArr.length);
+  let numRandom = Math.floor(Math.random() * 3)
   let alcoholImg = "";
-  if (randomAlcohol === 0) {
+  if (numRandom === 0) {
     alcoholImg = "white";
-  } else {
+  } else if (numRandom === 1){
     alcoholImg = "red";
+  } else if(numRandom === 2){
+    alcoholImg = "cocktail";
   }
 
   let alcoholType = new Alcohol(randomPositionX, alcoholImg);
@@ -133,7 +143,9 @@ function colisionPersonaConAlcohol() {
       alcoholArr.splice(index, 1);
       objetoColisionado.node.remove();
       scoreNode.innerText++;
+      audio.play();
     }
+
   });
 }
 
@@ -171,6 +183,5 @@ window.addEventListener("keydown", (event) => {
 - colisionPersonaConAgua()✅
 - colisionPersonaConAlcohol()✅
 - score✅
-- subirScore()
-- gameOver()
+- gameOver()✅
 */
