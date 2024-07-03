@@ -5,15 +5,13 @@ class Alcohol {
       this.node.src = "./images/wine-red.png";
     } else if (type === "white") {
       this.node.src = "./images/wine-white.png";
-      //! Ayuda: No aparece elemento de wine white
     }
     gameBoxNode.append(this.node);
 
-    console.log(this.node);
     this.x = randomPositionX;
     this.y = -60;
-    this.w = 60;
-    this.h = 60;
+    this.w = 80;
+    this.h = 80;
 
     // configuración inicial del elemento
     this.node.style.position = "absolute"; // se tiene que indicar posición absoluto para poder usar las posiciones de top y left

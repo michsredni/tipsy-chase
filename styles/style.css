@@ -1,15 +1,8 @@
 body {
   margin: 0;
-  background-color: rgb(240, 240, 240);
-}
-
-#start-btn {
-  background-color: rgb(230, 88, 11);
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
   color: white;
-  padding: 20px;
-  font-size: 20px;
-  margin-top: 40px;
-  border-radius: 10px;
 }
 
 .container {
@@ -17,18 +10,52 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#splash-screen {
   margin: 50px;
 }
 
+#splash-screen h1 {
+  font-size: 32px;
+}
+
+#splash-screen h3 {
+  font-size: 24px;
+}
+
+
+#start-btn, #restart-btn {
+  background-color: rgb(248, 111, 38);
+  color: white;
+  padding: 20px 80px;
+  font-size: 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+
+#instructions {
+  margin-top: 40px;
+}
+.instructions-img {
+  width: 40px;
+}
+
+.instructions-elements {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+}
+
 #game-box {
-  background-color: rgb(185, 137, 137);
-  width: 600px;
-  height: 400px;
+  width: 1000px;
+  height: 600px;
 
   position: relative; /* permite posicionar los elementos de forma absoluta dentro del game-box */
   overflow: hidden; /* previene que los elementos salgan visualmente del game-box */
   user-select: none; /* previene que los elementos del game-box sean resaltados al hacer click */
-
+  
   background-image: url("../images/backgroundEmpty.png"); /* cuando es imagen estática se pone en css */
   background-position: center;
   background-size: cover;
@@ -38,7 +65,27 @@ body {
   pointer-events: none; /* previene que todos los elementos del game-box sean arrastrados al clickar sobre ellos */
 }
 
-#game-screen,
-#game-over-screen {
+#game-screen, #game-over-screen {
   display: none;
+  margin: 80px;
+}
+
+/** PANTALLA DE GAME OVER **/
+#game-over-screen{
+padding: 100px;
+}
+
+#game-over-screen h1{
+  font-size: 70px;
+  color:rgb(248, 111, 38);
+}
+
+#game-over-screen #sad-emoji {
+  font-size: 60px;
+  margin-top: 20px;
+}
+
+#game-over-screen #final-score, span {
+  font-size: 40px;
+  /* padding: 20px; */
 }

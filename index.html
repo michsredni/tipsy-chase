@@ -9,16 +9,32 @@
   <body>
     <!-- PANTALLA DE INICIO -->
     <div id="splash-screen" class="container">
-      <img src="./images/tipsy-chase-logo.png" height="300" alt="logo" />
-      <button id="start-btn">START</button>
+      <div id="logo"><img src="./images/tipsy-chase-logo.png" height="300" alt="logo" /></div>
+      <!-- INSTRUCCIONES -->
+      <div id="instructions">
+        <h1>CÓMO JUGAR</h1>
+        <div class="instructions-elements">
+          <img src="./images/comandos.png" alt="comandos" class="instructions-img" style="width: 60px;">
+          <h3>Usa las teclas de derecha e izquierda para poder moverte</h3>
+        </div>
+        <div class="instructions-elements">
+          <img src="./images/combined-wine.png" alt="combined-wine" class="instructions-img" style="width: 60px;">
+          <h3>Consigue la mayor cantidad de alcohol para ganar puntos</h3>
+        </div>
+        <div class="instructions-elements">
+          <img src="./images/glass.png" alt="glass" class="instructions-img" style="width: 60px;">
+          <h3>Cuidado con los vasos de agua que te hacen perder</h3>
+        </div>
+      </div>
       <div>
-        <H1>CÓMO JUGAR</H1>
+        <button id="start-btn">START</button>
       </div>
     </div>
 
     <!-- PANTALLA DE JUEGO -->
     <div id="game-screen" class="container">
       <!-- Elementos del juego como puntuación, vidas, etc deberia ir aqui (dentro del game-screen pero fuera del game-box) -->
+       <div><span>Score:</span><span id="score">0</span></div>
       <div id="game-box">
         <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
       </div>
@@ -26,7 +42,10 @@
 
     <!-- PANTALLA FINAL -->
     <div id="game-over-screen" class="container">
-      <img src="./images/gameover.png" width="500" alt="logo" />
+      <h1>Game Over</h1>
+      <div><span>Score:</span><span id="final-score"></span></div>
+      <div><p id="sad-emoji">🥺</p></div>
+      <div><button id="restart-btn">Intentar de nuevo</button></div>
     </div>
 
     <script src="./js/main.js"></script>

@@ -6,9 +6,9 @@ class Persona {
     gameBoxNode.append(this.node);
 
     this.x = gameBoxNode.offsetWidth / 2; // distancia entre la caja y el borde de la persona
-    this.y = 340
-    this.w = 40;
-    this.h = 60;
+    this.y = gameBoxNode.offsetHeight - 80
+    this.w = 50;
+    this.h = 80;
 
     // configuración inicial del elemento
     this.node.style.position = "absolute"; // se tiene que indicar posición absoluto para poder usar las posiciones de top y left
