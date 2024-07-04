@@ -16,6 +16,9 @@ const finalScoreNode = document.querySelector("#final-score");
 // game box
 const gameBoxNode = document.querySelector("#game-box");
 
+// vidas
+const vidasNode = document.querySelector("#vidas")
+
 // id de intervals
 let mainIntervalId = null;
 let vasosAguaIntervalId = null;
@@ -30,9 +33,7 @@ let alcoholArr = [];
 let bonusArr = []
 
 let audio = new Audio("./audio/select-sound-121244.mp3");
-let audioGameOver = new Audio(
-  "./audio/8-bit-video-game-lose-sound-version-1-145828.mp3"
-);
+let audioGameOver = new Audio("./audio/8-bit-video-game-lose-sound-version-1-145828.mp3");
 
 //* FUNCIONES GLOBALES DEL JUEGO
 function startGame() {
@@ -65,6 +66,10 @@ function startGame() {
   bonusIntervalId = setInterval(() => {
     bonusAppear()
   }, 20000)
+
+  caminandoObjetoIntervalId = setInterval(() => {
+    personaObj.changeImage()
+  }, 150)
 
 
 }
@@ -130,14 +135,24 @@ function alcoholAppear() {
 }
 
 function colisionPersonaConAgua() {
-  vasosDeAguaArr.forEach((eachVasoDeAgua) => {
+  vasosDeAguaArr.forEach((eachVasoDeAgua, index) => {
     if (
       eachVasoDeAgua.x < personaObj.x + personaObj.w &&
       eachVasoDeAgua.x + personaObj.w > personaObj.x &&
       eachVasoDeAgua.y < personaObj.y + personaObj.h &&
       eachVasoDeAgua.y + personaObj.h > personaObj.y
     ) {
-      gameOver();
+      vasosDeAguaArr.splice(index, 1);
+      eachVasoDeAgua.node.remove();
+      if (personaObj.vidas === 3) {
+        personaObj.vidas -= 1;
+        vidasNode.innerText = "💙💙";      
+      } else if (personaObj.vidas === 2) {
+        personaObj.vidas -= 1;
+        vidasNode.innerText = "💙";
+      } else if (personaObj.vidas === 1) {
+        gameOver();
+      }
     }
   });
 }
@@ -201,14 +216,12 @@ function colisionBonusConPersona() {
       eachBonus.y < personaObj.y + personaObj.h &&
       eachBonus.y + personaObj.h > personaObj.y
     ) {
-      let bonusColisionado = bonusArr[index];
       bonusArr.splice(index, 1);
-      bonusColisionado.node.remove();
-      personaObj.movementSpeed++
+      eachBonus.node.remove();
+      personaObj.movementSpeed = 60
     }
     
   });
-  console.log (personaObj)
 }
 //* EVENT LISTENER
 startBtnNode.addEventListener("click", () => {

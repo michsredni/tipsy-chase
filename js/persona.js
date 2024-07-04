@@ -18,6 +18,8 @@ class Persona {
     this.node.style.height = `${this.h}px`;
 
     this.movementSpeed = 30
+    this.vidas = 3
+    this.imageNumber = 1
   }
 
   // aquí estaran los metodos de persona
@@ -30,4 +32,21 @@ class Persona {
         this.node.style.left = `${this.x}px`
       }
   }
+
+  changeImage(){
+    if(this.imageNumber === 1){
+      this.imageNumber = 2
+      this.node.src = "./images/character_femalePerson_walk2.png"
+    } else if(this.imageNumber === 2){
+      this.imageNumber = 3
+      this.node.src = "./images/character_femalePerson_walk3.png"
+    } else if(this.imageNumber === 3){
+       this.imageNumber = 4
+      this.node.src = "./images/character_femalePerson_walk4.png"
+    } else if(this.imageNumber === 4){
+      this.imageNumber = 1
+      this.node.src = "./images/character_femalePerson_walk1.png"
+    }
+  }
+
 }
