@@ -13,7 +13,6 @@ const reStartBtnNode = document.querySelector("#restart-btn");
 const scoreNode = document.querySelector("#score");
 const finalScoreNode = document.querySelector("#final-score");
 
-
 // game box
 const gameBoxNode = document.querySelector("#game-box");
 
@@ -21,17 +20,19 @@ const gameBoxNode = document.querySelector("#game-box");
 let mainIntervalId = null;
 let vasosAguaIntervalId = null;
 let alcoholIntervalId = null;
+let bonusIntervalId = null
 
 //* VARIABLES GLOBALES DEL JUEGO
 let personaObj = null; // esto significa que la persona no existe aun, existirá más adelante
-let vasoDeAguaObj = null;
-let alcoholObj = null;
 
 let vasosDeAguaArr = [];
 let alcoholArr = [];
+let bonusArr = []
 
-let audio = new Audio("./audio/select-sound-121244.mp3")
-let audioGameOver = new Audio ("./audio/8-bit-video-game-lose-sound-version-1-145828.mp3")
+let audio = new Audio("./audio/select-sound-121244.mp3");
+let audioGameOver = new Audio(
+  "./audio/8-bit-video-game-lose-sound-version-1-145828.mp3"
+);
 
 //* FUNCIONES GLOBALES DEL JUEGO
 function startGame() {
@@ -40,12 +41,11 @@ function startGame() {
 
   gameScreenNode.style.display = "flex";
   gameOverScreenNode.style.display = "none";
-  lifeHeartsNode.value = 100;
-
 
   personaObj = new Persona();
   vasosDeAguaArr = [];
   alcoholArr = [];
+  bonusArr = []
 
   // iniciar el intervalo inicial del juego
   mainIntervalId = setInterval(() => {
@@ -55,12 +55,18 @@ function startGame() {
   // iniciar el intervalo que aparecen vasos de agua en el juego
   vasosAguaIntervalId = setInterval(() => {
     vasoDeAguaAppear();
-  }, 4000);
+  }, 1500);
 
   // iniciar el intervalo que aparece alcohol en el juego
   alcoholIntervalId = setInterval(() => {
     alcoholAppear();
-  }, 1300);
+  }, 500);
+
+  bonusIntervalId = setInterval(() => {
+    bonusAppear()
+  }, 20000)
+
+
 }
 
 function gameLoop() {
@@ -72,8 +78,12 @@ function gameLoop() {
   alcoholArr.forEach((eachAlcohol) => {
     eachAlcohol.automaticMovementAlcohol();
   });
+  bonusArr.forEach((eachBonus) => {
+    eachBonus.automaticMovementBonus()
+  })
   colisionPersonaConAgua();
   colisionPersonaConAlcohol();
+  colisionBonusConPersona()
 }
 
 function gameOver() {
@@ -97,25 +107,26 @@ function gameOver() {
 function vasoDeAguaAppear() {
   let randomPositionX = Math.floor(Math.random() * gameBoxNode.offsetWidth);
 
-  let vasosDeAgua = new VasoAgua(randomPositionX);
-  vasosDeAguaArr.push(vasosDeAgua);
+  vasoDeAguaObj = new VasoAgua(randomPositionX);
+  vasosDeAguaArr.push(vasoDeAguaObj);
 }
 
 function alcoholAppear() {
   let randomPositionX = Math.floor(Math.random() * gameBoxNode.offsetWidth);
   // let randomAlcohol = Math.floor(Math.random() * alcoholArr.length);
-  let numRandom = Math.floor(Math.random() * 3)
+  let numRandom = Math.floor(Math.random() * 3);
   let alcoholImg = "";
   if (numRandom === 0) {
     alcoholImg = "white";
-  } else if (numRandom === 1){
+  } else if (numRandom === 1) {
     alcoholImg = "red";
-  } else if(numRandom === 2){
+  } else if (numRandom === 2) {
     alcoholImg = "cocktail";
   }
 
-  let alcoholType = new Alcohol(randomPositionX, alcoholImg);
-  alcoholArr.push(alcoholType);
+  let alcoholObj = new Alcohol(randomPositionX, alcoholImg);
+  alcoholArr.push(alcoholObj);
+
 }
 
 function colisionPersonaConAgua() {
@@ -145,10 +156,60 @@ function colisionPersonaConAlcohol() {
       scoreNode.innerText++;
       audio.play();
     }
-
   });
+  incrementarVelocidad ()
 }
 
+function incrementarVelocidad (){
+  if (scoreNode.innerText >= 5 && scoreNode.innerText < 10) {
+    alcoholArr.forEach((eachAlcohol) => {
+      eachAlcohol.speed = 3
+    })
+    vasosDeAguaArr.forEach((eachVasoDeAgua) => {
+      eachVasoDeAgua.speed = 3
+    })
+
+  } else if (scoreNode.innerText >= 10 && scoreNode.innerText < 20){
+    alcoholArr.forEach((eachAlcohol) => {
+      eachAlcohol.speed = 4
+    })
+    vasosDeAguaArr.forEach((eachVasoDeAgua) => {
+      eachVasoDeAgua.speed = 4
+    })
+  } else if (scoreNode.innerText >= 20){
+    alcoholArr.forEach((eachAlcohol) => {
+      eachAlcohol.speed = 6
+    })
+    vasosDeAguaArr.forEach((eachVasoDeAgua) => {
+      eachVasoDeAgua.speed = 6
+    })
+  } 
+}
+
+function bonusAppear() {
+  let randomPositionX = Math.floor(Math.random() * gameBoxNode.offsetWidth);
+
+  bonusObj = new Bonus(randomPositionX);
+  bonusArr.push(bonusObj);
+}
+
+function colisionBonusConPersona() {
+  bonusArr.forEach((eachBonus, index) => {
+    if (
+      eachBonus.x < personaObj.x + personaObj.w &&
+      eachBonus.x + personaObj.w > personaObj.x &&
+      eachBonus.y < personaObj.y + personaObj.h &&
+      eachBonus.y + personaObj.h > personaObj.y
+    ) {
+      let bonusColisionado = bonusArr[index];
+      bonusArr.splice(index, 1);
+      bonusColisionado.node.remove();
+      personaObj.movementSpeed++
+    }
+    
+  });
+  console.log (personaObj)
+}
 //* EVENT LISTENER
 startBtnNode.addEventListener("click", () => {
   startGame();
