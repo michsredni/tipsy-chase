@@ -33,9 +33,9 @@ let alcoholArr = [];
 let bonusArr = [];
 
 let audio = new Audio("./audio/select-sound-121244.mp3");
-let audioGameOver = new Audio(
-  "./audio/8-bit-video-game-lose-sound-version-1-145828.mp3"
-);
+let audioGameOver = new Audio("./audio/8-bit-video-game-lose-sound-version-1-145828.mp3");
+let audioColisionAgua = new Audio("./audio/oh-oh.mp3")
+let audioColisionBonus = new Audio("./audio/lets-go.mp3")
 
 //* FUNCIONES GLOBALES DEL JUEGO
 function startGame() {
@@ -107,6 +107,8 @@ function gameOver() {
 
   audioGameOver.play();
   audio.pause();
+  audioColisionAgua.pause()
+  audioColisionBonus.pause()
 }
 
 function vasoDeAguaAppear() {
@@ -142,6 +144,9 @@ function colisionPersonaConAgua() {
     ) {
       vasosDeAguaArr.splice(index, 1);
       eachVasoDeAgua.node.remove();
+      audioColisionAgua.pause()
+      audioColisionAgua.play()
+
       if (personaObj.vidas === 3) {
         personaObj.vidas -= 1;
         vidasNode.innerText = "💙💙";
@@ -183,7 +188,8 @@ function colisionBonusConPersona() {
     ) {
       bonusArr.splice(index, 1);
       eachBonus.node.remove();
-      personaObj.movementSpeed += 80;
+      personaObj.movementSpeed += 60;
+      audioColisionBonus.play()
     }
   });
 }

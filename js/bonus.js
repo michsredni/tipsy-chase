@@ -6,8 +6,8 @@ class Bonus {
     
         this.x = randomPositionX
         this.y = -60
-        this.w = 55;
-        this.h = 55;
+        this.w = 80;
+        this.h = 80;
     
         // configuración inicial del elemento
         this.node.style.position = "absolute"; // se tiene que indicar posición absoluto para poder usar las posiciones de top y left

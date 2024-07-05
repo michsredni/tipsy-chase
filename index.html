@@ -12,7 +12,7 @@
       <div id="logo"><img src="./images/tipsy-chase-logo.png" height="250px" alt="logo" /></div>
       <!-- INSTRUCCIONES -->
       <div id="instructions">
-        <h1>CÓMO JUGAR</h1>
+        <h1>Cómo jugar</h1>
         <div class="instructions-elements">
           <img src="./images/comandos.png" alt="comandos" class="instructions-img" style="width: 60px;">
           <h3>Usa las teclas de derecha e izquierda para poder moverte</h3>
@@ -22,8 +22,12 @@
           <h3>Consigue la mayor cantidad de alcohol para ganar puntos</h3>
         </div>
         <div class="instructions-elements">
-          <img src="./images/glass.png" alt="glass" class="instructions-img" style="width: 60px;">
+          <img src="./images/glass.png" alt="glass" class="instructions-img" style='width: 60px;'>
           <h3>Cuidado con los vasos de agua que te hacen perder</h3>
+        </div>
+        <div class="instructions-elements">
+          <img src="./images/sushi-egg.png" alt="glass" class="instructions-img" style='width: 60px;'>
+          <h3>Atenta a los sushi que te ayudan a moverte más rápido</h3>
         </div>
       </div>
       <div>
@@ -44,9 +48,10 @@
 
     <!-- PANTALLA FINAL -->
     <div id="game-over-screen" class="container">
-      <h1>Game Over</h1>
+      <h1>PERDISTE</h1>
+      <h2>Tomaste más vasos de agua que de alcohol</h2>
       <div><span>Score: </span><span id="final-score"></span></div>
-      <div><p id="sad-emoji">🥺</p></div>
+      <div id="game-over-img"><img src="./images/game-over-character-water-glasses.png" alt=""></div>
       <div><button id="restart-btn">Intentar de nuevo</button></div>
     </div>
 
