@@ -1,4 +1,4 @@
-# TIPSY CHASE
+# TIPSY CHACE
 
 ## [Play the Game!](https://michsredni.github.io/tipsy-chase/)
 
@@ -7,7 +7,7 @@
 
 # Description
 
-Tipsy Chase is a game where the player's goal is to grab as many alcohol bottles as possible while avoiding the glasses of water that are being dropped from the top. The game ends when the player's lives are out. After the game ends, a score is calculated based on the amount of alcohol bottles that where grabbed.
+Tipsy Chace is a game where the player's goal is to grab as many alcohol bottles as possible while avoiding the glasses of water that are being dropped from the top. The game ends when the player's lives are out. After the game ends, a score is calculated based on the amount of alcohol bottles that where grabbed.
 
 # Main Functionalities
 
@@ -46,7 +46,7 @@ Tipsy Chase is a game where the player's goal is to grab as many alcohol bottles
 # Extra Links 
 
 ### Slides
-[Link](www.your-slides-url-here.com)
+[Link](https://www.canva.com/design/DAGKE2PRm5w/VQc9WhkFHLYU5wSQS_Mh3g/edit?utm_content=DAGKE2PRm5w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Deploy
 [Link](https://michsredni.github.io/tipsy-chase/)
