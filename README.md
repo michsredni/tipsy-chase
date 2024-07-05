@@ -1,4 +1,4 @@
-# TIPSY CHASE
+# TIPSY CHACE
 
 ## [Play the Game!](https://michsredni.github.io/tipsy-chase/)
 
