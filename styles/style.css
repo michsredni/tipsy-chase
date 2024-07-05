@@ -73,6 +73,10 @@ body {
   display: none;
 }
 
+#game-screen span{
+  font-size: 30px;
+}
+
 /** PANTALLA DE GAME OVER **/
 #game-over-screen {
   padding-top: 100px;
